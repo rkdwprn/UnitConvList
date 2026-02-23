@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "UnitCalc",
+    "slug": "unitcalc",
+    "version": "0.0.1",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "scheme": "unitcalc",
+    "newArchEnabled": true,
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.unitcalc.app"
+    },
+    "android": {
+      "package": "com.unitcalc.app"
+    },
+    "plugins": [
+      "expo-router"
+    ]
+  }
+}
