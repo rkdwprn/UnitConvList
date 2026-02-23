@@ -35,3 +35,33 @@ UnitCalc v0.0.1 — 초기 버전
 - 설정: 밝은/어두운 테마, 한글/영어
 - Expo Router, AsyncStorage, SI 기준 단위 변환
 ```
+
+---
+
+## 0.0.2 (2025-02-23)
+
+### 요약
+- **Expo SDK 54** 및 **Expo Go(SDK 54)** 호환으로 업그레이드.
+- 의존성 정리 및 런타임/번들 오류 수정.
+
+### 구현·변경 내용
+- **의존성**
+  - Expo SDK 52 → **54** (React 19.1.0, React Native 0.81.5).
+  - expo-router 4 → **6**, expo-asset·expo-status-bar·expo-localization 등 SDK 54 권장 버전 적용.
+  - react-native-reanimated **4.x**, react-native-gesture-handler·react-native-screens·react-native-safe-area-context 등 업데이트.
+  - **expo-linking** 추가 (expo-router 6 의존).
+  - **react-native-worklets** 추가 및 **0.5.1** 고정 (Expo Go 네이티브와 버전 일치).
+- **설정**
+  - **metro.config.js** 추가: `unstable_enablePackageExports: false` (Hermes "runtime not ready" 완화).
+  - package.json: React 19.1.0, TypeScript ~5.9.2 등 정리.
+- **기타**
+  - Android Expo Go(SDK 54)에서 정상 실행 목표로 호환성 맞춤.
+
+### GitHub 요약 (v0.0.2)
+```
+UnitCalc v0.0.2 — Expo SDK 54 / Expo Go 호환
+
+- Expo SDK 54, React 19.1.0, RN 0.81.5, expo-router 6
+- expo-linking·react-native-worklets@0.5.1 추가, Reanimated 4.x·Gesture Handler 등 업데이트
+- metro.config.js 추가(runtime not ready 대응), Worklets JS/네이티브 버전 일치(0.5.1)
+```
