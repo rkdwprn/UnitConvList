@@ -1,20 +1,21 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
   View,
   Text,
   TextInput,
+  Image,
   StyleSheet,
   TouchableOpacity,
   Alert,
   KeyboardAvoidingView,
   Platform,
+  Dimensions,
 } from 'react-native';
 import DraggableFlatList, {
   RenderItemParams,
   ScaleDecorator,
 } from 'react-native-draggable-flatlist';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { useRouter } from 'expo-router';
 import { useApp } from '@/context/AppContext';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import {
@@ -29,6 +30,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 const MAX_ITEMS = 100;
 const ROW_HEIGHT = 72;
+const EMPTY_ICON_SIZE = Math.min(660, Dimensions.get('window').width - 48);
 
 function RowItem({
   item,
@@ -40,7 +42,7 @@ function RowItem({
   isActive: boolean;
 }) {
   const colors = useThemeColors();
-  const { t, removeItem } = useApp();
+  const { t, removeItem, duplicateItem } = useApp();
   const [input, setInput] = useState('');
   const num = parseFloat(input.replace(/,/g, '')) || 0;
   const converted = convertUnit(
@@ -55,11 +57,12 @@ function RowItem({
   const displayTo = toUnit.name;
 
   const onLongPressRow = useCallback(() => {
-    Alert.alert(t('main.deleteConfirm'), '', [
+    Alert.alert(t('main.itemMenu'), '', [
       { text: t('common.cancel'), style: 'cancel' },
+      { text: t('common.copy'), onPress: () => duplicateItem(item.id) },
       { text: t('common.delete'), style: 'destructive', onPress: () => removeItem(item.id) },
     ]);
-  }, [item.id, removeItem, t]);
+  }, [item.id, removeItem, duplicateItem, t]);
 
   return (
     <ScaleDecorator>
@@ -88,7 +91,7 @@ function RowItem({
           />
           <View style={styles.conversionWrap}>
             <Text style={[styles.conversionText, { color: colors.text }]} numberOfLines={1}>
-              {displayFrom} —→ {formatConverted(converted)} {displayTo}
+              {displayFrom} → {formatConverted(converted)} {displayTo}
             </Text>
             {item.title ? (
               <Text style={[styles.titleText, { color: colors.textSecondary }]} numberOfLines={1}>
@@ -111,10 +114,14 @@ function RowItem({
 
 export default function MainScreen() {
   const colors = useThemeColors();
-  const router = useRouter();
   const { items, reorderItems, t } = useApp();
   const sorted = [...items].sort((a, b) => a.order - b.order);
-  const canAdd = items.length < MAX_ITEMS;
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowSplash(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const renderItem = useCallback(
     ({ item, drag, isActive }: RenderItemParams<ConversionItem>) => (
@@ -130,6 +137,18 @@ export default function MainScreen() {
     [reorderItems]
   );
 
+  if (showSplash) {
+    return (
+      <View style={styles.splashWrap}>
+        <Image
+          source={require('@/assets/splash-icon.png')}
+          style={styles.splashImage}
+          resizeMode="contain"
+        />
+      </View>
+    );
+  }
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <KeyboardAvoidingView
@@ -138,10 +157,19 @@ export default function MainScreen() {
         keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
       >
         {sorted.length === 0 ? (
-          <View style={styles.empty}>
-            <Text style={[styles.emptyText, { color: colors.textSecondary }]}>
-              {t('main.empty')}
-            </Text>
+          <View style={[styles.empty, { backgroundColor: '#ffffff' }]}>
+            <View style={[styles.emptyCard, { backgroundColor: '#ffffff', borderColor: colors.border }]}>
+              <View style={styles.emptyIconWrap}>
+                <Image
+                  source={require('@/assets/splash-icon.png')}
+                  style={styles.emptyIconImage}
+                  resizeMode="contain"
+                />
+              </View>
+              <Text style={[styles.emptyText, { color: colors.textSecondary }]}>
+                {t('main.empty')}
+              </Text>
+            </View>
           </View>
         ) : (
           <DraggableFlatList
@@ -150,16 +178,8 @@ export default function MainScreen() {
             renderItem={renderItem}
             onDragEnd={onDragEnd}
             containerStyle={styles.list}
+            contentContainerStyle={styles.listContent}
           />
-        )}
-        {canAdd && (
-          <TouchableOpacity
-            style={[styles.fab, { backgroundColor: colors.primary }]}
-            onPress={() => router.push('/add')}
-            activeOpacity={0.8}
-          >
-            <Ionicons name="add" size={28} color="#fff" />
-          </TouchableOpacity>
         )}
       </KeyboardAvoidingView>
     </GestureHandlerRootView>
@@ -167,11 +187,26 @@ export default function MainScreen() {
 }
 
 const styles = StyleSheet.create({
+  splashWrap: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  splashImage: {
+    width: EMPTY_ICON_SIZE,
+    height: EMPTY_ICON_SIZE,
+    backgroundColor: '#ffffff',
+  },
   container: {
     flex: 1,
   },
   list: {
     flex: 1,
+  },
+  listContent: {
+    paddingTop: 8,
+    paddingBottom: 24,
   },
   empty: {
     flex: 1,
@@ -179,13 +214,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 24,
   },
+  emptyCard: {
+    width: '100%',
+    maxWidth: 400,
+    borderRadius: 20,
+    borderWidth: 1,
+    paddingVertical: 24,
+    paddingHorizontal: 20,
+    alignItems: 'center',
+  },
+  emptyIconWrap: {
+    backgroundColor: '#ffffff',
+    marginBottom: 24,
+  },
+  emptyIconImage: {
+    width: EMPTY_ICON_SIZE,
+    height: EMPTY_ICON_SIZE,
+    backgroundColor: '#ffffff',
+  },
   emptyText: {
-    fontSize: 16,
+    fontSize: 15,
     textAlign: 'center',
-    lineHeight: 24,
+    lineHeight: 22,
+    opacity: 0.9,
   },
   row: {
     minHeight: ROW_HEIGHT,
+    marginBottom: 6,
     borderBottomWidth: StyleSheet.hairlineWidth,
     flexDirection: 'row',
     alignItems: 'center',
@@ -195,16 +250,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 16,
-    paddingVertical: 10,
+    paddingVertical: 12,
   },
   input: {
-    width: 72,
-    height: 44,
+    width: 150,
+    minHeight: 48,
     borderWidth: 1,
     borderRadius: 8,
-    paddingHorizontal: 10,
-    fontSize: 16,
-    marginRight: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    fontSize: 18,
+    marginRight: 14,
   },
   conversionWrap: {
     flex: 1,
@@ -212,6 +268,7 @@ const styles = StyleSheet.create({
   },
   conversionText: {
     fontSize: 15,
+    fontWeight: '600',
   },
   titleText: {
     fontSize: 12,
@@ -220,20 +277,5 @@ const styles = StyleSheet.create({
   dragHandle: {
     padding: 8,
     marginLeft: 4,
-  },
-  fab: {
-    position: 'absolute',
-    right: 20,
-    bottom: 24,
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
   },
 });

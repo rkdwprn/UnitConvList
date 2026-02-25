@@ -1,7 +1,12 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Linking } from 'react-native';
 import { useApp } from '@/context/AppContext';
 import { useThemeColors } from '@/hooks/useThemeColors';
+import appConfig from '../../app.json';
+
+const APP_VERSION = appConfig.expo.version;
+const DEVELOPER_NAME = 'perfectLemon';
+const DEVELOPER_EMAIL = 'rkdwprn@gmail.com';
 
 export default function SettingsScreen() {
   const colors = useThemeColors();
@@ -60,6 +65,26 @@ export default function SettingsScreen() {
           </TouchableOpacity>
         </View>
       </View>
+
+      <View style={[styles.section, { backgroundColor: colors.card, borderColor: colors.border }]}>
+        <Text style={[styles.sectionTitle, { color: colors.text }]}>{t('settings.appInfo')}</Text>
+        <View style={[styles.infoRow, { borderColor: colors.border }]}>
+          <Text style={[styles.infoLabel, { color: colors.textSecondary }]}>{t('settings.version')}</Text>
+          <Text style={[styles.infoValue, { color: colors.text }]}>{APP_VERSION}</Text>
+        </View>
+        <View style={[styles.infoRow, { borderColor: colors.border }]}>
+          <Text style={[styles.infoLabel, { color: colors.textSecondary }]}>{t('settings.developer')}</Text>
+          <Text style={[styles.infoValue, { color: colors.text }]}>{DEVELOPER_NAME}</Text>
+        </View>
+        <TouchableOpacity
+          style={[styles.infoRow, styles.infoRowLast, { borderColor: colors.border }]}
+          onPress={() => Linking.openURL(`mailto:${DEVELOPER_EMAIL}`)}
+          activeOpacity={0.7}
+        >
+          <Text style={[styles.infoLabel, { color: colors.textSecondary }]}>{t('settings.email')}</Text>
+          <Text style={[styles.infoValue, { color: colors.primary }]}>{DEVELOPER_EMAIL}</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -89,4 +114,14 @@ const styles = StyleSheet.create({
   },
   optionText: { fontSize: 15 },
   radio: { width: 10, height: 10, borderRadius: 5 },
+  infoRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+  },
+  infoRowLast: { borderBottomWidth: 0 },
+  infoLabel: { fontSize: 15 },
+  infoValue: { fontSize: 15 },
 });

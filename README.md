@@ -1,4 +1,4 @@
-# UnitCalc
+# UnitConvList
 
 물리 단위 변환 계산기를 목록으로 관리하는 앱입니다.  
 Android / iOS (Expo Go에서 디버깅 가능).

@@ -29,6 +29,7 @@ interface AppContextValue extends AppState {
   setLanguage: (l: Language) => void;
   setItems: (items: ConversionItem[]) => void;
   addItem: (item: Omit<ConversionItem, 'id' | 'order'>) => void;
+  duplicateItem: (id: string) => void;
   removeItem: (id: string) => void;
   reorderItems: (ordered: ConversionItem[]) => void;
   t: (key: string) => string;
@@ -116,6 +117,20 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
+  const duplicateItem = useCallback((id: string) => {
+    setState((s) => {
+      const source = s.items.find((i) => i.id === id);
+      if (!source || s.items.length >= 100) return s;
+      const newId = `item_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
+      const insertOrder = source.order + 1;
+      const newItem: ConversionItem = { ...source, id: newId, order: insertOrder };
+      const updated = s.items.map((i) =>
+        i.order >= insertOrder ? { ...i, order: i.order + 1 } : i
+      );
+      return { ...s, items: [...updated, newItem].sort((a, b) => a.order - b.order) };
+    });
+  }, []);
+
   const removeItem = useCallback((id: string) => {
     setState((s) => ({ ...s, items: s.items.filter((i) => i.id !== id) }));
   }, []);
@@ -138,11 +153,12 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       setLanguage,
       setItems,
       addItem,
+      duplicateItem,
       removeItem,
       reorderItems,
       t,
     }),
-    [state, setTheme, setLanguage, setItems, addItem, removeItem, reorderItems, t]
+    [state, setTheme, setLanguage, setItems, addItem, duplicateItem, removeItem, reorderItems, t]
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

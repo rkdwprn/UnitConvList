@@ -26,6 +26,7 @@ yarn-error.*
 .env
 .env.local
 *.log
+.git-commit-msg.txt
 
 # OS
 .DS_Store

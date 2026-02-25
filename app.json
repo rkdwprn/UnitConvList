@@ -1,25 +1,40 @@
 {
   "expo": {
-    "name": "UnitCalc",
-    "slug": "unitcalc",
-    "version": "0.0.1",
+    "name": "UnitConvList",
+    "slug": "unitconvlist",
+    "version": "0.0.4",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
-    "scheme": "unitcalc",
+    "scheme": "unitconvlist",
     "newArchEnabled": true,
+    "icon": "./assets/icon.png",
     "splash": {
+      "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.unitcalc.app"
+      "bundleIdentifier": "com.unitconvlist.app"
     },
     "android": {
-      "package": "com.unitcalc.app"
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.unitconvlist.app",
+      "versionCode": 1
     },
     "plugins": [
-      "expo-router"
-    ]
+      "expo-router",
+      "expo-asset",
+      "expo-localization"
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "7dda0606-8ace-4e7c-a869-d9db26b95f52"
+      }
+    }
   }
 }

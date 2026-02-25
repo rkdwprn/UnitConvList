@@ -3,6 +3,7 @@ export const ko = {
   common: {
     ok: '확인',
     cancel: '취소',
+    copy: '복사',
     delete: '삭제',
     add: '추가',
     save: '저장',
@@ -12,12 +13,15 @@ export const ko = {
   // 탭/페이지
   nav: {
     main: '메인',
+    menu: '메뉴',
     add: '추가',
     settings: '설정',
   },
   // 메인
   main: {
-    empty: '단위 변환 목록이 없습니다.\n오른쪽 아래 + 버튼으로 추가하세요.',
+    emptyTitle: 'UnitConvList',
+    empty: '단위 변환 목록이 없습니다.\n아래 [추가] 탭에서 변환 항목을 추가하세요.',
+    itemMenu: '항목',
     deleteConfirm: '이 항목을 삭제할까요?',
     maxItems: '최대 {{max}}개까지 추가할 수 있습니다.',
   },
@@ -36,6 +40,10 @@ export const ko = {
     language: '언어',
     languageKo: '한글',
     languageEn: '영어',
+    appInfo: '앱 정보',
+    version: '버전',
+    developer: '개발자',
+    email: '이메일',
   },
   // 단위 종류
   units: {

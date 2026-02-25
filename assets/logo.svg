@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <rect width="100" height="100" fill="#ffffff"/>
+  <!-- U: thick stroke, path only (no font). Left stem, arc bottom, right stem -->
+  <path d="M 28 24 L 28 54 A 22 22 0 0 0 72 54 L 72 24" fill="none" stroke="#2563eb" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Circular arrow: convert symbol, overlaps U right half. Center (68, 40), radius 18 -->
+  <path d="M 68 22 A 18 18 0 0 1 86 40" fill="none" stroke="#2563eb" stroke-width="9" stroke-linecap="round"/>
+  <path d="M 83 38 L 90 40 L 85 45 Z" fill="#2563eb"/>
+</svg>

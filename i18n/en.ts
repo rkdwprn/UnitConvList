@@ -2,6 +2,7 @@ export const en = {
   common: {
     ok: 'OK',
     cancel: 'Cancel',
+    copy: 'Copy',
     delete: 'Delete',
     add: 'Add',
     save: 'Save',
@@ -10,11 +11,14 @@ export const en = {
   },
   nav: {
     main: 'Main',
+    menu: 'Menu',
     add: 'Add',
     settings: 'Settings',
   },
   main: {
-    empty: 'No conversion items.\nTap + below to add one.',
+    emptyTitle: 'UnitConvList',
+    empty: 'No conversion items yet.\nAdd items from the [Add] tab below.',
+    itemMenu: 'Item',
     deleteConfirm: 'Delete this item?',
     maxItems: 'You can add up to {{max}} items.',
   },
@@ -31,6 +35,10 @@ export const en = {
     language: 'Language',
     languageKo: 'Korean',
     languageEn: 'English',
+    appInfo: 'App info',
+    version: 'Version',
+    developer: 'Developer',
+    email: 'Email',
   },
   units: {
     length: 'Length',

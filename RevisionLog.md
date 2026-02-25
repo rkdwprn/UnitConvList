@@ -1,9 +1,13 @@
-# UnitCalc 버전 기록 (Revision Log)
+# UnitConvList 버전 기록 (Revision Log)
+
+**규칙:** 새 버전을 기록할 때 `app.json`의 `expo.version`도 해당 버전으로 업데이트한다.
+
+---
 
 ## 0.0.1 (2025-02-23)
 
 ### 요약
-- **UnitCalc** 앱 초기 버전.
+- **UnitConvList** 앱 초기 버전.
 - 물리 단위 변환 목록을 관리하고 실시간 변환 결과를 보여주는 Android/iOS 앱 (Expo Go 디버깅 지원).
 
 ### 구현 내용
@@ -28,7 +32,7 @@
 
 ### GitHub 요약 (v0.0.1)
 ```
-UnitCalc v0.0.1 — 초기 버전
+UnitConvList v0.0.1 — 초기 버전
 
 - 메인: 변환 목록, 실시간 변환(예: kg→g), 드래그 순서 변경, 길게 눌러 삭제, FAB으로 추가(최대 100개)
 - 추가: 9종 단위(길이/넓이/무게/부피/온도/압력/속도/데이터/시간), 선택 제목, 원본·변환 단위 선택
@@ -59,9 +63,62 @@ UnitCalc v0.0.1 — 초기 버전
 
 ### GitHub 요약 (v0.0.2)
 ```
-UnitCalc v0.0.2 — Expo SDK 54 / Expo Go 호환
+UnitConvList v0.0.2 — Expo SDK 54 / Expo Go 호환
 
 - Expo SDK 54, React 19.1.0, RN 0.81.5, expo-router 6
 - expo-linking·react-native-worklets@0.5.1 추가, Reanimated 4.x·Gesture Handler 등 업데이트
 - metro.config.js 추가(runtime not ready 대응), Worklets JS/네이티브 버전 일치(0.5.1)
+```
+
+---
+
+## 0.0.3 (2025-02-24)
+
+### 요약
+- **설정** 페이지에 앱 정보(버전, 개발자, 이메일) 추가.
+- **로고** 정리: U + 원형 화살표 조합, 흰색 배경 PNG 아이콘 적용.
+- **Google Play 스토어** 업로드 준비: EAS Build 설정 및 가이드 추가.
+
+### 구현·변경 내용
+- **설정 페이지**
+  - 앱 정보 섹션: 버전(`app.json` 연동), 개발자(perfectLemon), 이메일(rkdwprn@gmail.com, 탭 시 메일 앱 연동).
+  - 다국어: `settings.appInfo`, `version`, `developer`, `email` (ko/en).
+- **로고·아이콘**
+  - U + Circular Arrow 로고 이미지(PNG)로 `icon.png`, `splash-icon.png` 적용.
+  - `assets/logo.svg` 유지(경로 기반 모던 아이콘, 필요 시 `scripts/generate-logo.js`로 PNG 재생성 가능).
+- **Play 스토어**
+  - **eas.json**: production 프로필(AAB, `autoIncrement`), submit 프로필.
+  - **app.json**: `expo.android.versionCode: 1` 추가.
+  - **package.json**: `build:android` 스크립트 추가.
+  - **PLAYSTORE.md**: EAS 로그인 → AAB 빌드 → Play Console 등록·업로드 절차 정리.
+
+### GitHub 요약 (v0.0.3)
+```
+UnitConvList v0.0.3 — 앱 정보, 로고, Play 스토어 준비
+
+- 설정: 앱 정보(버전/개발자 perfectLemon/이메일), 메일 링크
+- 로고: U+원형화살표 PNG 아이콘·스플래시 적용
+- EAS Build(eas.json), versionCode, build:android, PLAYSTORE.md 가이드
+```
+
+---
+
+## 0.0.4 (2026-02-25)
+
+### 요약
+- **버전 기록 규칙** 정비. "버전기록" 명령 시 RevisionLog.md 하단에 새 버전 추가·app.json 버전 연동·GitHub 요약·Git 원격 절차를 Cursor 규칙으로 정리.
+
+### 구현·변경 내용
+- **.cursor/rules/version-log.mdc**
+  - "버전기록" 입력 시 동작: RevisionLog.md 하단에 버전 번호 올려 추가(예: 0.0.4).
+  - app.json의 **expo.version** 수정을 **필수**로 명시.
+  - 각 버전 섹션에 GitHub 요약 블록 포함.
+  - Git 원격: `https://github.com/rkdwprn/UnitCalc_RevGit.git` 명시, 커밋 메시지·스테이징 절차 정리.
+
+### GitHub 요약 (v0.0.4)
+```
+UnitConvList v0.0.4 — 버전 기록 규칙 정비
+
+- 버전기록 명령: RevisionLog.md 하단 추가, app.json expo.version 필수 수정
+- GitHub 요약·Git 원격(UnitCalc_RevGit) 절차를 Cursor 규칙(version-log.mdc)에 정리
 ```
