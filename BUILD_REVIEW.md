@@ -6,7 +6,7 @@
 |------|------|
 | **package.json** | react 19.1.0, react-dom 19.1.0, overrides로 peer 충돌 방지됨 |
 | **package-lock.json** | 커밋되어 있음 → EAS에서 `npm ci` 정상 동작 |
-| **app.json** | version 0.0.3, versionCode 1, package `com.unitcalc.app`, icon/splash 경로 유효 |
+| **app.json** | version 0.0.4, versionCode 1, package `com.unitconvlist.app`, icon/splash 경로 유효 |
 | **eas.json** | production 프로필 AAB, autoIncrement, appVersionSource remote |
 | **assets** | icon.png, splash-icon.png 존재 |
 | **린트** | app/context/constants 오류 없음 |
@@ -17,9 +17,8 @@
 ## ⚠️ 참고 사항 (선택)
 
 1. **버전 표기 통일**  
-   - `package.json`의 `"version"`은 **0.0.2**, `app.json`의 `expo.version`은 **0.0.3**입니다.  
-   - 앱 내 표시는 `app.json` 기준(0.0.3)이므로 동작에는 문제 없습니다.  
-   - 원하면 `package.json`의 version을 0.0.3으로 맞춰 두면 관리가 편합니다.
+   - `package.json`과 `app.json`의 `expo.version`을 **0.0.4**로 맞춰 두었습니다.  
+   - 앱 내 설정 화면 버전은 `app.json`을 참조합니다.
 
 2. **설정 화면 버전 읽기**  
    - `app/(tabs)/settings.tsx`에서 `import appConfig from '../../app.json'`로 버전을 읽고 있습니다.  

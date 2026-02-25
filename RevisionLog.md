@@ -113,12 +113,44 @@ UnitConvList v0.0.3 — 앱 정보, 로고, Play 스토어 준비
   - "버전기록" 입력 시 동작: RevisionLog.md 하단에 버전 번호 올려 추가(예: 0.0.4).
   - app.json의 **expo.version** 수정을 **필수**로 명시.
   - 각 버전 섹션에 GitHub 요약 블록 포함.
-  - Git 원격: `https://github.com/rkdwprn/UnitCalc_RevGit.git` 명시, 커밋 메시지·스테이징 절차 정리.
+  - Git 원격: `https://github.com/rkdwprn/UnitConvList.git` 명시, 커밋 메시지·스테이징 절차 정리.
 
 ### GitHub 요약 (v0.0.4)
 ```
 UnitConvList v0.0.4 — 버전 기록 규칙 정비
 
 - 버전기록 명령: RevisionLog.md 하단 추가, app.json expo.version 필수 수정
-- GitHub 요약·Git 원격(UnitCalc_RevGit) 절차를 Cursor 규칙(version-log.mdc)에 정리
+- GitHub 요약·Git 원격(UnitConvList) 절차를 Cursor 규칙(version-log.mdc)에 정리
+```
+
+---
+
+## 0.0.5 (2026-02-25)
+
+### 요약
+- **AdMob** 하단 배너 광고 추가로 수익화 지원.
+- 메인 헤더 문구 "Unit Converter List"로 변경, Expo/빌드 설정 정리.
+
+### 구현·변경 내용
+- **AdMob 배너**
+  - **react-native-google-mobile-ads** 도입, app.json 플러그인(테스트 앱 ID) 설정.
+  - **components/AdBanner.tsx**: ANCHORED_ADAPTIVE_BANNER, Expo Go에서는 미표시.
+  - 탭 레이아웃 하단에 배너 고정. 프로덕션 배너 단위 ID 적용(ca-app-pub-5922905617998234/6202262757).
+  - **docs/ADMOB.md**: 앱 ID·광고 단위 ID 교체 및 수익화 절차 안내.
+- **UI·문구**
+  - 메인 페이지 상단 헤더: "Unit Calc" → "Unit Converter List".
+- **빌드·설정**
+  - Expo Doctor 대응: 아이콘 정사각형(1024×1024) 재생성(scripts/generate-logo.js), expo-font·expo-constants 추가.
+  - Git 원격 UnitConvList.git, slug unitconvlist, 버전 기록 규칙 정리.
+- **기타**
+  - **ChattingLog.md**: 채팅 기록(입력/답변·시간·요약) 형식 정리.
+  - **docs/EXPO_QR_보는_방법.md**: QR/수동 URL·터널 실행 방법 안내.
+
+### GitHub 요약 (v0.0.5)
+```
+UnitConvList v0.0.5 — AdMob 배너, 헤더 문구, 빌드 정리
+
+- AdMob: 하단 배너(react-native-google-mobile-ads), 배너 단위 ID 적용, docs/ADMOB.md
+- 메인 헤더 "Unit Converter List", Expo Doctor(아이콘·expo-font/constants) 대응
+- ChattingLog.md, Expo QR 가이드, Git 원격 UnitConvList
 ```

@@ -2,7 +2,7 @@
   "expo": {
     "name": "UnitConvList",
     "slug": "unitconvlist",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
     "scheme": "unitconvlist",
@@ -28,13 +28,16 @@
     "plugins": [
       "expo-router",
       "expo-asset",
-      "expo-localization"
+      "expo-localization",
+      "expo-font",
+      ["react-native-google-mobile-ads",{"androidAppId":"ca-app-pub-3940256099942544~3347511713","iosAppId":"ca-app-pub-3940256099942544~1458002511"}]
     ],
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "7dda0606-8ace-4e7c-a869-d9db26b95f52"
+        "projectId": "2754d217-df0d-4b79-a01b-8a269bb39ec2"
       }
-    }
+    },
+    "owner": "rkdwprn"
   }
 }

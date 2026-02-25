@@ -11,6 +11,7 @@ import { Stack, useRouter } from 'expo-router';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import { useApp } from '@/context/AppContext';
 import { Ionicons } from '@expo/vector-icons';
+import { AdBanner } from '@/components/AdBanner';
 
 export default function TabsLayout() {
   const colors = useThemeColors();
@@ -38,34 +39,39 @@ export default function TabsLayout() {
 
   return (
     <>
-      <Stack
-        screenOptions={{
-          headerStyle: { backgroundColor: colors.card },
-          headerTintColor: colors.text,
-          headerTitleStyle: { fontWeight: '600', fontSize: 18 },
-          headerShadowVisible: false,
-        }}
-      >
-        <Stack.Screen
-          name="index"
-          options={{
-            title: 'Unit Calc',
-            headerRight: menuButton,
-          }}
-        />
-        <Stack.Screen
-          name="add"
-          options={{
-            title: t('nav.add'),
-          }}
-        />
-        <Stack.Screen
-          name="settings"
-          options={{
-            title: t('nav.settings'),
-          }}
-        />
-      </Stack>
+      <View style={styles.layoutContainer}>
+        <View style={styles.stackWrap}>
+          <Stack
+            screenOptions={{
+              headerStyle: { backgroundColor: colors.card },
+              headerTintColor: colors.text,
+              headerTitleStyle: { fontWeight: '600', fontSize: 18 },
+              headerShadowVisible: false,
+            }}
+          >
+            <Stack.Screen
+              name="index"
+              options={{
+                title: 'Unit Converter List',
+                headerRight: menuButton,
+              }}
+            />
+            <Stack.Screen
+              name="add"
+              options={{
+                title: t('nav.add'),
+              }}
+            />
+            <Stack.Screen
+              name="settings"
+              options={{
+                title: t('nav.settings'),
+              }}
+            />
+          </Stack>
+        </View>
+        <AdBanner />
+      </View>
 
       <Modal
         visible={menuVisible}
@@ -99,6 +105,12 @@ export default function TabsLayout() {
 }
 
 const styles = StyleSheet.create({
+  layoutContainer: {
+    flex: 1,
+  },
+  stackWrap: {
+    flex: 1,
+  },
   backdrop: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.35)',

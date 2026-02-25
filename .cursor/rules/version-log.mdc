@@ -11,7 +11,7 @@ globs: RevisionLog.md
 
 ## 1. RevisionLog.md
 
-- **위치:** 기존 버전이 요약되어 있는 동일 파일. 현재 최신 버전은 **0.0.4**.
+- **위치:** 기존 버전이 요약되어 있는 동일 파일. 현재 최신 버전은 **0.0.5**.
 - **추가 방식:** 버전 번호를 **올려서**(예: 0.0.3 → 0.0.4) **파일 하단**에 새 섹션을 추가한다.
 - **형식:**
   - `## X.Y.Z (YYYY-MM-DD)`
@@ -31,7 +31,7 @@ globs: RevisionLog.md
 
 ## 4. Git
 
-- **원격 저장소:** `https://github.com/rkdwprn/UnitCalc_RevGit.git`
+- **원격 저장소:** `https://github.com/rkdwprn/UnitConvList.git`
 - 버전 기록 후 커밋 시:
   - 변경 사항 스테이징: `git add .`
   - 커밋 메시지: 해당 버전 요약 사용(예: `v0.0.4: ...`)
