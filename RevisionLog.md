@@ -154,3 +154,37 @@ UnitConvList v0.0.5 — AdMob 배너, 헤더 문구, 빌드 정리
 - 메인 헤더 "Unit Converter List", Expo Doctor(아이콘·expo-font/constants) 대응
 - ChattingLog.md, Expo QR 가이드, Git 원격 UnitConvList
 ```
+
+---
+
+## 0.0.6 (2026-02-25)
+
+### 요약
+- **스토어 등록** 자료 생성(Store_contents): 앱 아이콘 512px, 기능 그래픽, 스크린샷 플레이스홀더·설명 문구.
+- 앱 아이콘을 UC 로고(unitcalc-logo.png)로 통일, 시작 화면(스플래시)을 현재 아이콘으로 변경.
+- R8(난독화)·가독화 파일 안내, Play 서명 키(.der·.jks) 해결 가이드 추가.
+
+### 구현·변경 내용
+- **스토어 자료**
+  - **Store_contents/** 폴더: app_icon_512.png(512×512), feature_graphic_1024x500.png(1024×500).
+  - 휴대전화/7인치/10인치 스크린샷 플레이스홀더(2장씩), README·스토어_설명_문구.md.
+  - **scripts/generate-store-contents.js**: 스토어용 자산 일괄 생성.
+  - **docs/STORE_DESCRIPTIONS.md**: 간단한 설명(80자 이내)·자세한 설명 한·영.
+- **아이콘·시작 화면**
+  - **scripts/generate-icon-from-png.js**: unitcalc-logo.png → 1024×1024 icon.png·splash-icon.png 생성.
+  - **app.json** splash.image: splash-icon.png → **icon.png**(시작 화면을 현재 앱 아이콘과 동일하게).
+- **문서**
+  - **docs/가독화_매핑_파일_Play_업로드.md**: R8·매핑 파일·Play 업로드 절차.
+  - **docs/PLAY_SIGNING_KEY_오류_해결.md**: 서명 키 불일치, .der(인증서) 사용 불가, .jks 위치·업로드 키 재설정.
+  - **docs/RELEASE_NOTES_EN.md**: 출시 노트 영문·한글, Play 언어별 입력 안내.
+- **빌드**
+  - **expo-build-properties**: android.enableMinifyInReleaseBuilds(true), extraProguardRules(React Native 유지).
+
+### GitHub 요약 (v0.0.6)
+```
+UnitConvList v0.0.6 — 스토어 자료, 아이콘·스플래시, R8·서명 가이드
+
+- Store_contents: 앱 아이콘 512, 기능 그래픽 1024×500, 스크린샷 플레이스홀더, 스토어 설명(80자·전체)
+- 아이콘: unitcalc-logo 기반, 시작 화면을 icon.png로 통일
+- R8(minify)·매핑 파일·Play 서명 키(.der/.jks) 해결 문서, 출시 노트 한·영
+```

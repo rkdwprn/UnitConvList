@@ -2,14 +2,14 @@
   "expo": {
     "name": "UnitConvList",
     "slug": "unitconvlist",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
     "scheme": "unitconvlist",
     "newArchEnabled": true,
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -30,7 +30,14 @@
       "expo-asset",
       "expo-localization",
       "expo-font",
-      ["react-native-google-mobile-ads",{"androidAppId":"ca-app-pub-3940256099942544~3347511713","iosAppId":"ca-app-pub-3940256099942544~1458002511"}]
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-3940256099942544~3347511713",
+          "iosAppId": "ca-app-pub-3940256099942544~1458002511"
+        }
+      ],
+      ["expo-build-properties",{"android":{"enableMinifyInReleaseBuilds":true,"extraProguardRules":"-keep class com.facebook.react.** { *; }\n-keep class com.facebook.hermes.** { *; }\n-keepattributes SourceFile,LineNumberTable\n-keepattributes *Annotation*"}}]
     ],
     "extra": {
       "router": {},
